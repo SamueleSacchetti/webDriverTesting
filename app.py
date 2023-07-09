@@ -9,6 +9,8 @@ import time
 import random
 import json
 import subprocess
+import ssl
+import undetected_chromedriver as uc
 from selenium import webdriver
 from dateutil import parser as date_parser
 from selenium.webdriver import ActionChains
@@ -20,7 +22,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support import expected_conditions as EC
 
-
+ssl._create_default_https_context = ssl._create_unverified_context
 
 logging.config.dictConfig({
     "version": 1,
@@ -83,14 +85,22 @@ def run(driver, username, password, url):
     except TimeoutException:
         LOGGER.info("Failed to login due to timeout. Retrying...")
     except Exception as e:
-        LOGGER.exception("Failed to login: " + str(e))
-        six.reraise(Exception, e, sys.exc_info()[2])
+        if "net::ERR_PROXY_CONNECTION_FAILED" in str(e):
+            LOGGER.error("Failed to connect to the proxy server")
+        else:
+            LOGGER.exception("Failed to login: " + str(e))
+            six.reraise(Exception, e, sys.exc_info()[2])
     
     while True:
         try:
             try:
                 LOGGER.info("Requesting page: " + url)
                 driver.get(url)
+                # Apri un nuovo pannello con lo stesso URL
+                driver.execute_script("window.open('https://www.nike.com/login', 'new_window')")
+
+                # Passa alla nuova finestra aperta
+                driver.switch_to.window(driver.window_handles[-1])
             except TimeoutException:
                 LOGGER.info("Page load timed out but continuing anyway")
                 continue
@@ -98,9 +108,6 @@ def run(driver, username, password, url):
         except Exception:
                 continue
     
-    driver.quit()
-
-
 
 def login(driver, username, password):
     try:
@@ -113,15 +120,15 @@ def login(driver, username, password):
     wait_until_visible(driver=driver, xpath="//input[@id='username']")
 
     LOGGER.info("Entering username")
-    email_input = driver.find_element(By.XPATH, "//input[@id='username']")
+    email_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='username']")))
     email_input.clear()
     email_input.send_keys(username)
     
     submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
     submit_button.click()
-
+    
     LOGGER.info("Entering password")
-    password_input = driver.find_element(By.XPATH, "//input[@id='password']")
+    password_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='password']")))
     password_input.clear()
     password_input.send_keys(password)
 
@@ -130,7 +137,9 @@ def login(driver, username, password):
     submit_button.click()
 
     LOGGER.info("Logging in")
-    driver.find_element_by_xpath("//input[@value='SIGN IN']").click()
+    signIn_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='SIGN IN']")))
+    signIn_button.click()
+    #driver.find_element_by_xpath("//input[@value='SIGN IN']").click()
     
     wait_until_visible(driver=driver, xpath="//a[@data-path='myAccount:greeting']", duration=5)
     
@@ -147,15 +156,22 @@ if __name__ == "__main__":
     parser.add_argument("--webdriver-path", required=False, default=None)
     args = parser.parse_args()
 
+    '''
     driver = None
     if args.driver_type == "firefox":
         firefox_options = webdriver.FirefoxOptions()
         firefox_options.add_argument('--disable-blink-features=AutomationControlled')
         driver = webdriver.Firefox(options=firefox_options)
+    '''
 
-    elif args.driver_type == "chrome":
-        chrome_options = webdriver.ChromeOptions()
-        driver = webdriver.Chrome(options=chrome_options)
+    #elif args.driver_type == "chrome":
+    if args.driver_type == "chrome":
+        options = uc.ChromeOptions()
+        options.add_argument("--new-window")
+        options.user_data_dir = "c:\\temp\\profile"
+
+        driver = uc.Chrome(options = options) 
+        wait = WebDriverWait(driver, 10)
 
     else:
         raise Exception("Specified web browser not supported, only Firefox and Chrome are supported at this point")

@@ -1,0 +1,47 @@
+2023/07/08-20:12:28.729 6a07 Reusing MANIFEST /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/07/08-20:12:28.730 6a07 Recovering log #57
+2023/07/08-20:12:28.730 6a07 Reusing old log /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/000057.log 
+2023/07/08-20:12:28.730 6a07 Delete type=2 #56
+2023/07/08-20:12:31.474 14e03 Level-0 table #62: started
+2023/07/08-20:12:31.492 14e03 Level-0 table #62: 601 bytes OK
+2023/07/08-20:12:31.513 14e03 Delete type=0 #57
+2023/07/08-20:12:31.514 6a07 Manual compaction at level-0 from '\x00\x13\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x14\x00\x00\x00' @ 0 : 0; will stop at '\x00\x13\x00\x00\x05' @ 335 : 1
+2023/07/08-20:12:31.514 6a07 Compacting 1@0 + 1@1 files
+2023/07/08-20:12:31.530 6a07 Generated table #63@0: 40 keys, 1064 bytes
+2023/07/08-20:12:31.530 6a07 Compacted 1@0 + 1@1 files => 1064 bytes
+2023/07/08-20:12:31.553 6a07 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/08-20:12:31.554 6a07 Delete type=2 #62
+2023/07/08-20:12:31.554 6a07 Manual compaction at level-0 from '\x00\x13\x00\x00\x05' @ 335 : 1 .. '\x00\x14\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/07/08-20:12:31.556 14e03 Level-0 table #65: started
+2023/07/08-20:12:31.570 14e03 Level-0 table #65: 471 bytes OK
+2023/07/08-20:12:31.600 14e03 Delete type=2 #59
+2023/07/08-20:12:31.600 14e03 Delete type=0 #61
+2023/07/08-20:12:31.600 6a07 Manual compaction at level-0 from '\x00\x12\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x13\x00\x00\x00' @ 0 : 0; will stop at '\x00\x12\x00\x00\x05' @ 362 : 0
+2023/07/08-20:12:31.600 6a07 Compacting 1@0 + 1@1 files
+2023/07/08-20:12:31.613 6a07 Generated table #66@0: 38 keys, 1124 bytes
+2023/07/08-20:12:31.613 6a07 Compacted 1@0 + 1@1 files => 1124 bytes
+2023/07/08-20:12:31.637 6a07 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/08-20:12:31.637 6a07 Delete type=2 #65
+2023/07/08-20:12:31.638 6a07 Manual compaction at level-0 from '\x00\x12\x00\x00\x05' @ 362 : 0 .. '\x00\x13\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/07/08-20:12:37.861 14d03 Level-0 table #68: started
+2023/07/08-20:12:37.878 14d03 Level-0 table #68: 605 bytes OK
+2023/07/08-20:12:37.905 14d03 Delete type=2 #63
+2023/07/08-20:12:37.905 14d03 Delete type=0 #64
+2023/07/08-20:12:37.905 6a07 Manual compaction at level-0 from '\x00\x14\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x15\x00\x00\x00' @ 0 : 0; will stop at '\x00\x15\x00\x00\x05' @ 373 : 1
+2023/07/08-20:12:37.905 6a07 Compacting 1@0 + 1@1 files
+2023/07/08-20:12:37.919 6a07 Generated table #69@0: 42 keys, 1122 bytes
+2023/07/08-20:12:37.919 6a07 Compacted 1@0 + 1@1 files => 1122 bytes
+2023/07/08-20:12:37.944 6a07 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/08-20:12:37.944 6a07 Delete type=2 #68
+2023/07/08-20:12:37.945 6a07 Manual compaction at level-0 from '\x00\x15\x00\x00\x05' @ 373 : 1 .. '\x00\x15\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/07/08-20:12:37.945 6a07 Level-0 table #71: started
+2023/07/08-20:12:37.957 6a07 Level-0 table #71: 467 bytes OK
+2023/07/08-20:12:37.984 6a07 Delete type=2 #66
+2023/07/08-20:12:37.984 6a07 Delete type=0 #67
+2023/07/08-20:12:37.985 6a07 Manual compaction at level-0 from '\x00\x15\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x16\x00\x00\x00' @ 0 : 0; will stop at '\x00\x15\x00\x00\x05' @ 400 : 0
+2023/07/08-20:12:37.985 6a07 Compacting 1@0 + 1@1 files
+2023/07/08-20:12:38.000 6a07 Generated table #72@0: 40 keys, 1173 bytes
+2023/07/08-20:12:38.000 6a07 Compacted 1@0 + 1@1 files => 1173 bytes
+2023/07/08-20:12:38.025 6a07 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/08-20:12:38.026 6a07 Delete type=2 #71
+2023/07/08-20:12:38.026 6a07 Manual compaction at level-0 from '\x00\x15\x00\x00\x05' @ 400 : 0 .. '\x00\x16\x00\x00\x00' @ 0 : 0; will stop at (end)
