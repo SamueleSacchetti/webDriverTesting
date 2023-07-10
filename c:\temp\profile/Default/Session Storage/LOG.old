@@ -1,3 +1,6 @@
-2023/07/09-15:59:47.801 3103 Reusing MANIFEST /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/Session Storage/MANIFEST-000001
-2023/07/09-15:59:47.804 3103 Recovering log #4
-2023/07/09-15:59:47.806 3103 Reusing old log /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/Session Storage/000004.log 
+2023/07/10-10:44:42.837 4f03 Reusing MANIFEST /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/Session Storage/MANIFEST-000001
+2023/07/10-10:44:42.841 4f03 Recovering log #7
+2023/07/10-10:44:42.847 4f03 Reusing old log /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/Session Storage/000007.log 
+2023/07/10-10:45:45.492 3003 Level-0 table #11: started
+2023/07/10-10:45:45.505 3003 Level-0 table #11: 15951 bytes OK
+2023/07/10-10:45:45.533 3003 Delete type=0 #7

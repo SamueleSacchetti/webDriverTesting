@@ -1,25 +1,25 @@
-2023/07/08-20:12:24.779 6a07 Reusing MANIFEST /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/07/08-20:12:24.780 6a07 Recovering log #50
-2023/07/08-20:12:24.780 6a07 Reusing old log /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/000050.log 
-2023/07/08-20:12:24.780 6a07 Delete type=2 #49
-2023/07/08-20:12:25.639 6a07 Level-0 table #55: started
-2023/07/08-20:12:25.656 6a07 Level-0 table #55: 608 bytes OK
-2023/07/08-20:12:25.686 6a07 Delete type=0 #50
-2023/07/08-20:12:25.687 6a07 Manual compaction at level-0 from '\x00\x10\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at '\x00\x11\x00\x00\x05' @ 297 : 1
-2023/07/08-20:12:25.687 6a07 Compacting 1@0 + 1@1 files
-2023/07/08-20:12:25.699 6a07 Generated table #56@0: 38 keys, 1012 bytes
-2023/07/08-20:12:25.699 6a07 Compacted 1@0 + 1@1 files => 1012 bytes
-2023/07/08-20:12:25.725 6a07 compacted to: files[ 0 1 1 0 0 0 0 ]
-2023/07/08-20:12:25.726 6a07 Delete type=2 #55
-2023/07/08-20:12:25.727 6a07 Manual compaction at level-0 from '\x00\x11\x00\x00\x05' @ 297 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at (end)
-2023/07/08-20:12:25.727 6a07 Level-0 table #58: started
-2023/07/08-20:12:25.740 6a07 Level-0 table #58: 470 bytes OK
-2023/07/08-20:12:25.767 6a07 Delete type=0 #54
-2023/07/08-20:12:25.767 6a07 Delete type=2 #52
-2023/07/08-20:12:25.768 7003 Manual compaction at level-0 from '\x00\x11\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x12\x00\x00\x00' @ 0 : 0; will stop at '\x00\x11\x00\x00\x05' @ 324 : 0
-2023/07/08-20:12:25.768 7003 Compacting 1@0 + 1@1 files
-2023/07/08-20:12:25.781 7003 Generated table #59@0: 36 keys, 1064 bytes
-2023/07/08-20:12:25.781 7003 Compacted 1@0 + 1@1 files => 1064 bytes
-2023/07/08-20:12:25.807 7003 compacted to: files[ 0 1 1 0 0 0 0 ]
-2023/07/08-20:12:25.808 7003 Delete type=2 #58
-2023/07/08-20:12:25.808 6a07 Manual compaction at level-0 from '\x00\x11\x00\x00\x05' @ 324 : 0 .. '\x00\x12\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/07/10-10:49:10.468 970b Reusing MANIFEST /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/07/10-10:49:10.469 970b Recovering log #197
+2023/07/10-10:49:10.469 970b Reusing old log /Users/samuelesacchetti/Desktop/webDriverTesting/webDriverTesting/c:\temp\profile/Default/IndexedDB/https_www.nike.com_0.indexeddb.leveldb/000197.log 
+2023/07/10-10:49:10.469 970b Delete type=2 #196
+2023/07/10-10:49:16.961 970b Level-0 table #202: started
+2023/07/10-10:49:16.978 970b Level-0 table #202: 609 bytes OK
+2023/07/10-10:49:17.015 970b Delete type=0 #197
+2023/07/10-10:49:17.016 970b Manual compaction at level-0 from '\x00<\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00=\x00\x00\x00' @ 0 : 0; will stop at '\x00=\x00\x00\x05' @ 1103 : 1
+2023/07/10-10:49:17.016 970b Compacting 1@0 + 1@1 files
+2023/07/10-10:49:17.033 970b Generated table #203@0: 94 keys, 2195 bytes
+2023/07/10-10:49:17.033 970b Compacted 1@0 + 1@1 files => 2195 bytes
+2023/07/10-10:49:17.059 970b compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/10-10:49:17.061 970b Delete type=2 #202
+2023/07/10-10:49:17.061 970b Manual compaction at level-0 from '\x00=\x00\x00\x05' @ 1103 : 1 .. '\x00=\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/07/10-10:49:17.063 970b Level-0 table #205: started
+2023/07/10-10:49:17.074 970b Level-0 table #205: 471 bytes OK
+2023/07/10-10:49:17.104 970b Delete type=0 #201
+2023/07/10-10:49:17.104 970b Delete type=2 #199
+2023/07/10-10:49:17.104 970b Manual compaction at level-0 from '\x00=\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00>\x00\x00\x00' @ 0 : 0; will stop at '\x00=\x00\x00\x05' @ 1130 : 0
+2023/07/10-10:49:17.104 970b Compacting 1@0 + 1@1 files
+2023/07/10-10:49:17.117 970b Generated table #206@0: 92 keys, 2175 bytes
+2023/07/10-10:49:17.118 970b Compacted 1@0 + 1@1 files => 2175 bytes
+2023/07/10-10:49:17.140 970b compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/07/10-10:49:17.140 970b Delete type=2 #205
+2023/07/10-10:49:17.141 14c03 Manual compaction at level-0 from '\x00=\x00\x00\x05' @ 1130 : 0 .. '\x00>\x00\x00\x00' @ 0 : 0; will stop at (end)
