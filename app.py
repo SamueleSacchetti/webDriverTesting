@@ -10,6 +10,10 @@ import random
 import json
 import subprocess
 import ssl
+import itertools
+import imaplib
+import email
+import re
 import undetected_chromedriver as uc
 from selenium import webdriver
 from dateutil import parser as date_parser
@@ -78,72 +82,195 @@ def wait_until_clickable(driver, xpath=None, class_name=None, el_id=None, durati
         WebDriverWait(driver, duration, frequency).until(EC.element_to_be_clickable((By.ID, el_id)))
 
 def run(driver, username, password, url):
+    time.sleep(1)
     driver.maximize_window()
 
     try:
         login(driver=driver, username=username, password=password)
-    except TimeoutException:
-        LOGGER.info("Failed to login due to timeout. Retrying...")
+    #except TimeoutException:
+        #LOGGER.info("Failed to login due to timeout. Retrying...")
     except Exception as e:
-        if "net::ERR_PROXY_CONNECTION_FAILED" in str(e):
-            LOGGER.error("Failed to connect to the proxy server")
-        else:
-            LOGGER.exception("Failed to login: " + str(e))
-            six.reraise(Exception, e, sys.exc_info()[2])
+        LOGGER.exception("Failed to login: " + str(e))
+        six.reraise(Exception, e, sys.exc_info()[2])
     
     while True:
         try:
             try:
                 LOGGER.info("Requesting page: " + url)
                 driver.get(url)
-                # Apri un nuovo pannello con lo stesso URL
-                driver.execute_script("window.open('https://www.nike.com/login', 'new_window')")
-
-                # Passa alla nuova finestra aperta
-                driver.switch_to.window(driver.window_handles[-1])
+                time.sleep(2)
             except TimeoutException:
                 LOGGER.info("Page load timed out but continuing anyway")
                 continue
                                                          
-        except Exception:
+        except Exception as e:
+                LOGGER.exception("Error while processing page: " + str(e))
                 continue
     
 
 def login(driver, username, password):
+
+    desired_url = "https://www.nike.com/gb/"
+
     try:
         LOGGER.info("Requesting page: " + NIKE_HOME_URL)
         driver.get(NIKE_HOME_URL)
+        '''
+        LOGGER.info("Opening new panel")
+        time.sleep(2)
+        # Apri un nuovo pannello con lo stesso URL
+        driver.execute_script("window.open();")
+        time.sleep(1)
+        # Passa alla nuova finestra aperta
+        driver.switch_to.window(driver.window_handles[1])
+        driver.get("https://www.nike.com/login")
+        '''
+        time.sleep(1.5)
     except TimeoutException:
         LOGGER.info("Page load timed out but continuing anyway")
+    except Exception as e:
+        LOGGER.exception("Error while loading login page: " + str(e))
 
-    LOGGER.info("Waiting for login fields to become visible")
-    wait_until_visible(driver=driver, xpath="//input[@id='username']")
+    current_url = driver.current_url
+    LOGGER.info("Current url: " + current_url)
+    LOGGER.info("Desired url: " + desired_url)
 
-    LOGGER.info("Entering username")
-    email_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='username']")))
-    email_input.clear()
-    email_input.send_keys(username)
-    
-    submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
-    submit_button.click()
-    
-    LOGGER.info("Entering password")
-    password_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='password']")))
-    password_input.clear()
-    password_input.send_keys(password)
+    if not desired_url in current_url:
 
-    LOGGER.info("Clicco accedi")
-    submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
-    submit_button.click()
+        LOGGER.info("Waiting for login fields to become visible")
+        wait_until_visible(driver=driver, xpath="//input[@id='username']")
 
-    LOGGER.info("Logging in")
-    signIn_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='SIGN IN']")))
-    signIn_button.click()
-    #driver.find_element_by_xpath("//input[@value='SIGN IN']").click()
-    
-    wait_until_visible(driver=driver, xpath="//a[@data-path='myAccount:greeting']", duration=5)
-    
-    LOGGER.info("Successfully logged in")
+        LOGGER.info("Entering username")
+        time.sleep(2)
+        email_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='username']")))
+        email_input.clear()
+
+        for char in username:
+            email_input.send_keys(char)
+            time.sleep(0.25674) 
+        
+        time.sleep(1)
+        submit_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
+        submit_button.click()
+        
+        time.sleep(1)
+        LOGGER.info("Entering password")
+        try:
+            time.sleep(2)
+            password_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='password']")))
+        except TimeoutException:
+            LOGGER.info("Opening new panel")
+            time.sleep(2)
+            # Apri un nuovo pannello con lo stesso URL
+            driver.execute_script("window.open();")
+            time.sleep(1.4)
+            # Passa alla nuova finestra aperta
+            driver.switch_to.window(driver.window_handles[1])
+            login(driver, username, password)
+
+        password_input.clear()
+        time.sleep(2.5)
+
+        for char in password:
+            password_input.send_keys(char)
+            time.sleep(0.2334222) 
+
+        submit_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
+        submit_button.click()
+        time.sleep(20)
+
+        current_url = driver.current_url
+
+        if desired_url in current_url:
+            LOGGER.info("Successfully logged in")
+            return
+        else:
+
+            # Connessione al server IMAP di Gmail
+            imap_server = imaplib.IMAP4_SSL('imap.gmail.com', 993)
+
+            # Effettua l'accesso all'account Gmail
+            imap_server.login('sacchettisamuele@gmail.com', 'mzrhpmmmmhmkpabd')
+
+            # Seleziona la casella di posta "INBOX"
+            status, mailbox_data = imap_server.select('INBOX')
+
+            if status == 'OK':
+                # Criteri di ricerca per mittente e oggetto
+                search_criteria = '(FROM "nike@notifications.nike.com" SUBJECT "Ecco il tuo codice monouso")'
+
+                # Cerca le email corrispondenti ai criteri
+                status, email_ids = imap_server.search(None, search_criteria)
+
+                if status == 'OK':
+                    # Leggi l'ultima email corrispondente
+                    latest_email_id = email_ids[0].split()[-1]
+                    status, email_data = imap_server.fetch(latest_email_id, '(RFC822)')
+                    if status == 'OK':
+                        raw_email = email_data[0][1]
+                        email_message = email.message_from_bytes(raw_email)
+
+                        # Esegui il parsing del messaggio email per ottenere il codice di verifica
+                        email_body = ''
+                        if email_message.is_multipart():
+                            for part in email_message.walk():
+                                content_type = part.get_content_type()
+                                if content_type == 'text/plain':
+                                    try:
+                                        email_body = part.get_payload(decode=True).decode('utf-8')
+                                    except UnicodeDecodeError:
+                                        email_body = part.get_payload(decode=True).decode('latin-1')
+                                    break
+                        else:
+                            try:
+                                email_body = email_message.get_payload(decode=True).decode('utf-8')
+                            except UnicodeDecodeError:
+                                email_body = email_message.get_payload(decode=True).decode('latin-1')
+
+                        # Estrai l'ultimo codice di verifica utilizzando una espressione regolare
+                        verification_code = re.findall(r'codice di verifica monouso che hai richiesto: (\d+)', email_body)
+                        if verification_code:
+                            latest_verification_code = verification_code[-1]
+                            time.sleep(1)
+                            LOGGER.info("Entering enamil verification code: " + latest_verification_code)
+                            try:
+                                time.sleep(2)
+                                verificationCode_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@name='verificationCode']")))
+                            except TimeoutException:
+                                LOGGER.info("Opening new panel")
+                                time.sleep(2)
+                                # Apri un nuovo pannello con lo stesso URL
+                                driver.execute_script("window.open();")
+                                time.sleep(1.4)
+                                # Passa alla nuova finestra aperta
+                                driver.switch_to.window(driver.window_handles[1])
+                                login(driver, username, password)
+
+                            verificationCode_input.clear()
+                            time.sleep(1.5)
+
+                            for char in latest_verification_code:
+                                verificationCode_input.send_keys(char)
+                                time.sleep(0.4)  # Ritardo di 500 ms tra ogni carattere
+
+                            time.sleep(1)
+
+                        else:
+                            print("Nessun codice di verifica trovato nella email")
+
+            # Chiudi la connessione
+            imap_server.close()
+            imap_server.logout()
+
+            submit_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
+            submit_button.click()
+
+            time.sleep(5)
+            
+            LOGGER.info("Successfully logged in")
+    else:
+        LOGGER.info("Just logged in")
+        return
 
 
 if __name__ == "__main__":
@@ -168,6 +295,7 @@ if __name__ == "__main__":
     if args.driver_type == "chrome":
         options = uc.ChromeOptions()
         options.add_argument("--new-window")
+        options.add_argument("--disable-popup-blocking")
         options.user_data_dir = "c:\\temp\\profile"
 
         driver = uc.Chrome(options = options) 
@@ -177,4 +305,7 @@ if __name__ == "__main__":
         raise Exception("Specified web browser not supported, only Firefox and Chrome are supported at this point")
     
     
-    run(driver=driver, username=args.username, password=args.password, url=args.url)
+    try:
+        run(driver=driver, username=args.username, password=args.password, url=args.url)
+    except Exception as e:
+        LOGGER.exception("Error while running the script: " + str(e))
